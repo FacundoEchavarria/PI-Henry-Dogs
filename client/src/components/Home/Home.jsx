@@ -12,7 +12,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 //Actions
-import { getAllDogs, getAllTemp } from '../../redux/actions';
+import { clearAllDogs, getAllDogs, getAllTemp } from '../../redux/actions';
 
 
 
@@ -29,18 +29,22 @@ const Home = () =>{
     const [dogsPerPage, setDogsPerPage] = useState(8);
 
     useEffect(()=>{
+        setLoading(true)
         const getDogs = async() =>{
-            setLoading(true)
             dispatch(getAllDogs())
             dispatch(getAllTemp())
             setCurrentPage(1) 
             setLoading(false) 
         }
         getDogs()
+
+        return () => {
+            dispatch(clearAllDogs())
+        }
     }, [dispatch])
 
+
     //Paginate Logic
-    
     
     const indexLast = currentPage * dogsPerPage
     const indexFirst =indexLast - dogsPerPage
@@ -74,13 +78,15 @@ const Home = () =>{
             loading={loading}
             setLoading={setLoading}
             />
-            <SideBar/>
+            <SideBar
+            setCurrentPage={setCurrentPage}
+            />
             {
-            searchError?
-            <h2>No se encontro ese perro</h2>
-            :
-            (loading ?
+            loading?
             <p>Cargando...</p>
+            :
+            (searchError ?
+            <h2>No se encontro ese perro</h2>
             :
             <Cards
             dogs={currentDogs}

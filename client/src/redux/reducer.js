@@ -1,5 +1,11 @@
 //Actions type
-import { SEARCH_DOG, SEARCH_DOG_ERROR, GET_ALL_DOGS, GET_ALL_TEMP, ORDER, FILTER_BY_TEMP } from "./action-type";
+import { SEARCH_DOG, 
+    SEARCH_DOG_ERROR, 
+    GET_ALL_DOGS, 
+    GET_ALL_TEMP, 
+    ORDER, 
+    FILTER_BY_TEMP, 
+    FILTER_BY_ORIGIN } from "./action-type";
 
 let initialState = {
     dogs: [],
@@ -8,7 +14,8 @@ let initialState = {
     searchError: false,
     orderAndFilter: {
         order: 'A',
-        tempFilter: 'All'
+        tempFilter: 'All',
+        originFilter: ''
     }
 }
 
@@ -24,7 +31,8 @@ const reducer = (state = initialState, action) => {
                 searchError:false,
                 orderAndFilter:{
                     order: 'A',
-                    tempFilter: 'All'
+                    tempFilter: 'All',
+                    originFilter: 'all'
                 }
             }
 
@@ -36,7 +44,20 @@ const reducer = (state = initialState, action) => {
                 searchError:false,
                 orderAndFilter:{
                     order: 'A',
-                    tempFilter: 'All'
+                    tempFilter: 'All',
+                    originFilter: 'all'
+                }
+            }
+        case 'CLEAR_ALL_DOGS':
+            return {
+                ...state,
+                allDogs: [],
+                dogs: [],
+                searchError:false,
+                orderAndFilter:{
+                    order: 'A',
+                    tempFilter: 'All',
+                    originFilter: 'all'
                 }
             }
 
@@ -79,14 +100,14 @@ const reducer = (state = initialState, action) => {
             if(payload === 'All') {
                 return{
                     ...state,
-                    dog: state.allDogs,
+                    dogs: state.allDogs,
                     orderAndFilter: {
                         ...state.orderAndFilter,
-                        filter:payload
+                        tempFilter:payload,
+
                     }
                 }
             }else{
-
                 let filteredDogs = state.allDogs.filter((dog) => dog?.temperament?.includes(payload))
                 
                 return{
@@ -94,7 +115,37 @@ const reducer = (state = initialState, action) => {
                     dogs: filteredDogs,
                     orderAndFilter: {
                         ...state.orderAndFilter,
-                        filter:payload
+                        tempFilter:payload,
+                        originFilter:'all',
+
+                    },
+                    searchError: filteredDogs.length ? false : true
+                }
+            }
+        case FILTER_BY_ORIGIN:
+            if(payload === 'all') {
+                return{
+                    ...state,
+                    dogs: state.allDogs,
+                    orderAndFilter: {
+                        ...state.orderAndFilter,
+                        originFilter: payload,
+
+                    }
+                }
+            }else{
+                let filteredDogs = []
+                if(payload === 'real') filteredDogs = state.allDogs.filter((dog) => typeof(dog?.id) === 'number')
+                else if(payload === 'created') filteredDogs = state.allDogs.filter((dog) => typeof(dog?.id) === 'string')
+                
+                return{
+                    ...state,
+                    dogs: filteredDogs,
+                    orderAndFilter: {
+                        ...state.orderAndFilter,
+                        originFilter:payload,
+                        tempFilter: 'All',
+
                     },
                     searchError: filteredDogs.length ? false : true
                 }

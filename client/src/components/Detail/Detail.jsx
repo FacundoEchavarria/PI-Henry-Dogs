@@ -1,35 +1,47 @@
 //Styles
-import { useState } from 'react';
 import axios from 'axios'
-import styles from './Home.module.css'
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
 //Components
-import Cards from '../Home/Cards/Cards';
+
 
 
 
 const Detail = () =>{
-    let response = {}
-    const [dogs, setDogs] = useState([])
-    const handleClick = async() =>{
-        const {data} = await axios("http://localhost:3001/dogs/1")
-        response = data
-        if(response?.reference_image_id){
-            let image = await axios(`https://api.thedogapi.com/v1/images/${response.reference_image_id}`)
-            image = image.data
-            response.imagen = image?.url
-            console.log(response);
+
+    let {id} = useParams()
+    const [detailDog, setDetailDog] = useState({})
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        const getDetail = async() => {
+            setLoading(true)
+            const {data} = await axios(`http://localhost:3001/dogs/${id}`)
+            setDetailDog(data)
+            setLoading(false)
         }
-        setDogs([...dogs, response])
-    }
+            getDetail()
+            return setDetailDog({});
+    }, [id]);
 
     return (
         <div>
-            <h1>Home</h1>
-            <button onClick={handleClick}>hola</button>
-            <Cards
-            dogs = {dogs}
-            numItems = {8}
-            />
+            {loading ?
+            <p>cargando...</p>
+            :
+            <div>
+                <h1>Detail</h1>
+                <h2>{detailDog.name}</h2>
+                <h2>Peso: {detailDog.peso}</h2>
+                <h2>Altura: {detailDog.altura}</h2>
+                <h2>esperanza de vida: {detailDog.life_span}</h2>
+                <h2>temperamento: {detailDog.temperament}</h2>
+                <img src={detailDog.imagen} alt={`imagen del ${detailDog.name}`}/>
+            </div>
+            
+            }
+            
         </div>
     )
 }

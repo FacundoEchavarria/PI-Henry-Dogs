@@ -1,22 +1,28 @@
 //Librery components
 import { useDispatch, useSelector } from "react-redux";
 //Actions
-import { orderDogs, filterByTemper } from "../../../redux/actions";
+import { orderDogs, filterByTemper, filterByOrigin } from "../../../redux/actions";
 
 
-const SideBar = () =>{
+const SideBar = ({setCurrentPage}) =>{
 
 
     const dispatch = useDispatch();
     const temperament = useSelector((state) => state.temperament)
     const order = useSelector((state) => state.orderAndFilter.order)
-    const filter = useSelector((state) => state.orderAndFilter.filter)
+    const tempFilter = useSelector((state) => state.orderAndFilter.tempFilter)
+    const originFilter = useSelector((state) => state.orderAndFilter.originFilter)
 
     const handleOrder = (event) =>{
         dispatch(orderDogs(event.target.value))
     }
     const handleFilterByTemp = (event) =>{
+        setCurrentPage(1)
         dispatch(filterByTemper(event.target.value))
+    }
+    const handleFilterByOrigin = (event) =>{
+        setCurrentPage(1)
+        dispatch(filterByOrigin(event.target.value))
     }
 
     return (
@@ -27,14 +33,18 @@ const SideBar = () =>{
                     <option value="maxWeight">Mas Pesados</option>
                     <option value="minWeight">Menos pesados</option>
                 </select>
-
-                <select name="filterTemp" value={filter} onChange={handleFilterByTemp}>
+                <select name="filterTemp" value={tempFilter} onChange={handleFilterByTemp}>
                     <option value="All">All</option>
                     {temperament.map((temp) => {
                         return (
                             <option value={temp.nombre} key={temp.id}>{temp.nombre}</option>
                         )
                     })}
+                </select> 
+                <select name="filterOrigin" value={originFilter} onChange={handleFilterByOrigin}>
+                    <option value="all">All</option>
+                    <option value="real">Real</option>
+                    <option value="created">Created</option>
                 </select> 
         </div>
     )

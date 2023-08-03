@@ -1,7 +1,14 @@
 //Library components
 import axios from "axios";
 //Actions type
-import { SEARCH_DOG,SEARCH_DOG_ERROR, SEARCH_DOG_ERROR_NAME, GET_ALL_DOGS, GET_ALL_TEMP, ORDER, FILTER_BY_TEMP } from "./action-type";
+import { 
+    SEARCH_DOG,
+    SEARCH_DOG_ERROR, 
+    GET_ALL_DOGS, 
+    GET_ALL_TEMP, 
+    ORDER, 
+    FILTER_BY_TEMP, 
+    FILTER_BY_ORIGIN } from "./action-type";
 
 const URL = 'http://localhost:3001'
 
@@ -17,7 +24,7 @@ export const searchDog = (name) => {
             }else{
                 const {data} = await axios(`${URL}/dogs/`)
                 return dispatch({
-                    type: GET_ALL_DOGS,
+                    type: SEARCH_DOG,
                     payload: data
                 })
             }
@@ -38,6 +45,15 @@ export const getAllDogs = () =>{
         })
     }
 }
+export const clearAllDogs = () =>{
+    return (dispatch) =>{
+        return dispatch({
+            type: 'CLEAR_ALL_DOGS',
+            payload: []
+        })
+    }
+}
+
 export const getAllTemp = () =>{
     return async(dispatch) =>{
         const {data} = await axios(`${URL}/temperament/`)
@@ -59,6 +75,14 @@ export const filterByTemper = (temp) =>{
     return (dispatch) =>{
         return dispatch({
             type: FILTER_BY_TEMP,
+            payload: temp
+        })
+    }
+}
+export const filterByOrigin = (temp) =>{
+    return (dispatch) =>{
+        return dispatch({
+            type: FILTER_BY_ORIGIN,
             payload: temp
         })
     }
