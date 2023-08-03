@@ -35,7 +35,7 @@ const SideBar = () =>{
                             <option value={temp.nombre} key={temp.id}>{temp.nombre}</option>
                         )
                     })}
-                </select>
+                </select> 
         </div>
     )
 }
