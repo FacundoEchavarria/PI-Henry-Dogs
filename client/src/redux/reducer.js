@@ -1,5 +1,5 @@
 //Actions type
-import { SEARCH_DOG, SEARCH_DOG_ERROR, SEARCH_DOG_ERROR_NAME, GET_ALL_DOGS, GET_ALL_TEMP, ORDER, FILTER_BY_TEMP } from "./action-type";
+import { SEARCH_DOG, SEARCH_DOG_ERROR, GET_ALL_DOGS, GET_ALL_TEMP, ORDER, FILTER_BY_TEMP } from "./action-type";
 
 let initialState = {
     dogs: [],
@@ -20,6 +20,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state, 
                 dogs: payload,
+                allDogs: payload,
                 searchError:false,
                 orderAndFilter:{
                     order: 'A',
@@ -69,29 +70,35 @@ const reducer = (state = initialState, action) => {
                 ...state, 
                 dogs: orderedAllDogs,
                 orderAndFilter:{
+                    ...state.orderAndFilter,
                     order: payload ? payload : 'A',
-                    tempFilter: 'All'
                 },
             }
         
-        // case FILTER_BY_TEMP:
-        //     if(payload === 'All') {
-        //         return{
-        //             ...state,
-        //             allDogs: state.originalAllDogs,
-        //             searchedDogs: state.originalAllSearchDogs,
-        //             filter: payload
-        //         }
-        //     }
-        //     let filteredDogs = state.originalAllDogs.filter((dog) => dog?.temperament?.includes(payload))
-        //     let filteredSDogs = state.originalAllSearchDogs?.filter((dog) => dog?.temperament?.includes(payload))
-            
-        //     return{
-        //         ...state,
-        //         allDogs: filteredDogs,
-        //         searchedDogs: filteredSDogs,
-        //         filter: payload
-        //     }
+        case FILTER_BY_TEMP:
+            if(payload === 'All') {
+                return{
+                    ...state,
+                    dog: state.allDogs,
+                    orderAndFilter: {
+                        ...state.orderAndFilter,
+                        filter:payload
+                    }
+                }
+            }else{
+
+                let filteredDogs = state.allDogs.filter((dog) => dog?.temperament?.includes(payload))
+                
+                return{
+                    ...state,
+                    dogs: filteredDogs,
+                    orderAndFilter: {
+                        ...state.orderAndFilter,
+                        filter:payload
+                    },
+                    searchError: filteredDogs.length ? false : true
+                }
+            }
     
         default:
             return {...state}

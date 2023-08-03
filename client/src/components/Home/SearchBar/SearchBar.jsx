@@ -2,7 +2,7 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 
-import { orderDogs, searchDog } from "../../../redux/actions"
+import { filterByTemper, orderDogs, searchDog } from "../../../redux/actions"
 
 
 const SearchBar = ({setCurrentPage, setLoading}) => {
@@ -19,6 +19,7 @@ const SearchBar = ({setCurrentPage, setLoading}) => {
         await dispatch(searchDog(searchValue))
         setCurrentPage(1)
         dispatch(orderDogs(order))
+        dispatch(filterByTemper('All'))
         setLoading(false)
     }
 
