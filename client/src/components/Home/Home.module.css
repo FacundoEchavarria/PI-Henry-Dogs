@@ -1,0 +1,6 @@
+.home ul{
+    background-color: red;
+    display: flex;
+    list-style: none;
+
+}

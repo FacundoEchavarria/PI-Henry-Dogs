@@ -1,0 +1,7 @@
+export const SEARCH_DOG = 'SEARCH_DOG'
+export const SEARCH_DOG_ERROR_NAME = 'SEARCH_DOG_ERROR_NAME'
+export const SEARCH_DOG_ERROR = 'SEARCH_DOG_ERROR'
+export const GET_ALL_DOGS = 'GET_ALL_DOGS'
+export const GET_ALL_TEMP = 'GET_ALL_TEMP'
+export const ORDER = 'ORDER'
+export const FILTER_BY_TEMP = 'FILTER_BY_TEMP'
