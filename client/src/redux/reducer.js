@@ -69,8 +69,8 @@ const reducer = (state = initialState, action) => {
 
 
         case ORDER:
-            let orderedDogs = state.dogs.slice()
-            let orderedAllDogs = state.allDogs.slice()
+            let orderedDogs = [...state.dogs]
+            let orderedAllDogs = [...state.allDogs]
             switch (payload) {
                 case "A":
                     orderedDogs?.sort((a, b) => a.name.localeCompare(b.name))
@@ -81,12 +81,36 @@ const reducer = (state = initialState, action) => {
                     orderedAllDogs?.sort((a, b) => b.name.localeCompare(a.name))
                     break;
                 case "minWeight":
-                    orderedDogs?.sort((a, b) => a.peso?.split('-')[0] - b.peso?.split('-')[0])
-                    orderedAllDogs?.sort((a, b) => a.peso?.split('-')[0] - b.peso?.split('-')[0])
+                    orderedDogs?.sort((a, b) => {
+                        let pesoA = a.peso?.split(' - ')
+                        let pesoB = b.peso?.split(' - ')
+                        
+                        return parseInt(pesoA[0]) - parseInt(pesoB[0]) 
+                    })
+                    orderedAllDogs?.sort(((a, b) => {
+                        let pesoA = a.peso?.split(' - ')
+                        let pesoB = b.peso?.split(' - ')
+                        
+                        return parseInt(pesoA[0]) - parseInt(pesoB[0]) 
+                    }))
                     break;
                 case "maxWeight": 
-                    orderedDogs?.sort((a, b) => b.peso?.split('-')[1] - a.peso?.split('-')[1])
-                    orderedAllDogs?.sort((a, b) => b.peso?.split('-')[1] - a.peso?.split('-')[1])
+                    orderedDogs?.sort(((a, b) => {
+                        let pesoA = a.peso?.split(' - ')
+                        let pesoB = b.peso?.split(' - ')
+
+                        pesoA = pesoA.length > 1 ? pesoA[1] : pesoA[0]                      
+                        pesoB = pesoB.length > 1 ? pesoB[1] : pesoB[0]                      
+                        return parseInt(pesoB) - parseInt(pesoA) 
+                    }))
+                    orderedAllDogs?.sort(((a, b) => {
+                        let pesoA = a.peso?.split(' - ')
+                        let pesoB = b.peso?.split(' - ')
+
+                        pesoA = pesoA.length > 1 ? pesoA[1] : pesoA[0]                      
+                        pesoB = pesoB.length > 1 ? pesoB[1] : pesoB[0]                      
+                        return parseInt(pesoB) - parseInt(pesoA) 
+                    }))
                     break;
                 
                 default:

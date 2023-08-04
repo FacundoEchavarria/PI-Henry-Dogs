@@ -6,3 +6,6 @@
   font-family: 'dogFont'; /* Nombre que le damos a la fuente */
   src: url('../src/multimedia/RetroVintage-Regular.otf')
 }
+.app{
+  background-color: rgb(246, 241, 233);
+}

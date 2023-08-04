@@ -14,14 +14,14 @@ const getAllDogs = async () =>{
                 name: dog.name,
                 imagen: dog.image?.url,
                 altura: dog.height.metric,
-                peso: dog.weight.metric,
+                peso: dog.weight.metric === 'NaN' ? '20 - 34' : dog.weight.metric,
                 life_span: dog.life_span,
                 temperament: dog?.temperament 
             })
         })
 
         const dbDogs = await Dog.findAll()
-        allDogs = [...dbDogs, ...apiDogs]
+        allDogs = [...dbDogs, ...apiDogs].sort((a, b) => a.name.localeCompare(b.name))
         return allDogs
     } catch (error) {
         throw new Error(error.message)
