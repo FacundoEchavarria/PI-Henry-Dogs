@@ -69,18 +69,23 @@ const reducer = (state = initialState, action) => {
 
 
         case ORDER:
-            let orderedAllDogs = state.dogs.slice()
+            let orderedDogs = state.dogs.slice()
+            let orderedAllDogs = state.allDogs.slice()
             switch (payload) {
                 case "A":
+                    orderedDogs?.sort((a, b) => a.name.localeCompare(b.name))
                     orderedAllDogs?.sort((a, b) => a.name.localeCompare(b.name))
                     break;
                 case "D":
+                    orderedDogs?.sort((a, b) => b.name.localeCompare(a.name))
                     orderedAllDogs?.sort((a, b) => b.name.localeCompare(a.name))
                     break;
                 case "minWeight":
+                    orderedDogs?.sort((a, b) => a.peso?.split('-')[0] - b.peso?.split('-')[0])
                     orderedAllDogs?.sort((a, b) => a.peso?.split('-')[0] - b.peso?.split('-')[0])
                     break;
                 case "maxWeight": 
+                    orderedDogs?.sort((a, b) => b.peso?.split('-')[1] - a.peso?.split('-')[1])
                     orderedAllDogs?.sort((a, b) => b.peso?.split('-')[1] - a.peso?.split('-')[1])
                     break;
                 
@@ -89,7 +94,8 @@ const reducer = (state = initialState, action) => {
             }
             return {
                 ...state, 
-                dogs: orderedAllDogs,
+                dogs: orderedDogs,
+                allDogs: orderedAllDogs,
                 orderAndFilter:{
                     ...state.orderAndFilter,
                     order: payload ? payload : 'A',

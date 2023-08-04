@@ -21,6 +21,8 @@ const getAllTemperaments = async() =>{
                             temperamentRepeat.add(elem)
                         }
                     })
+                    allTemperaments = allTemperaments?.sort((a, b) => a.nombre.localeCompare(b.nombre))
+
                 }
             })
             await Temperament.bulkCreate(allTemperaments)

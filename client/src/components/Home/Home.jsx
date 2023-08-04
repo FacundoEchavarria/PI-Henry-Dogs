@@ -13,6 +13,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 //Actions
 import { clearAllDogs, getAllDogs, getAllTemp } from '../../redux/actions';
+import { NavLink } from 'react-router-dom';
+
 
 
 
@@ -98,6 +100,8 @@ const Home = () =>{
             nextPage={nextPage}
             prevPage={prevPage}
             />
+            <NavLink to={'/create'}><button>crear</button></NavLink>
+            
         </div>
     )
 }
