@@ -73,35 +73,38 @@ const Home = () =>{
     }
     
     return (
-        <div className={styles.home}>
-            <h1>Home</h1>
-            <SearchBar
-            setCurrentPage={setCurrentPage}
-            loading={loading}
-            setLoading={setLoading}
-            />
-            <SideBar
-            setCurrentPage={setCurrentPage}
-            />
-            {
-            loading?
-            <p>Cargando...</p>
-            :
-            (searchError ?
-            <h2>No se encontro ese perro</h2>
-            :
-            <Cards
-            dogs={currentDogs}
-            />)
-            }
-            <Pagination
-            pageNumbers = {pageNumbers}
-            paginate = {paginate}
-            nextPage={nextPage}
-            prevPage={prevPage}
-            />
-            <NavLink to={'/create'}><button>crear</button></NavLink>
-            
+        <div className={styles.homeBox}>
+            <div className={styles.sideBarBox}>
+                <SideBar
+                setCurrentPage={setCurrentPage}
+                />
+            </div>
+            <div className={styles.home}>
+                <h1>Home</h1>
+                <SearchBar
+                setCurrentPage={setCurrentPage}
+                loading={loading}
+                setLoading={setLoading}
+                />
+                
+                {
+                loading?
+                <p>Cargando...</p>
+                :
+                (searchError ?
+                <h2>No se encontro ese perro</h2>
+                :
+                <Cards
+                dogs={currentDogs}
+                />)
+                }
+                <Pagination
+                pageNumbers = {pageNumbers}
+                paginate = {paginate}
+                nextPage={nextPage}
+                prevPage={prevPage}
+                />
+            </div>
         </div>
     )
 }

@@ -14,6 +14,7 @@ const SideBar = ({setCurrentPage}) =>{
     const originFilter = useSelector((state) => state.orderAndFilter.originFilter)
 
     const handleOrder = (event) =>{
+        setCurrentPage(1)
         dispatch(orderDogs(event.target.value))
     }
     const handleFilterByTemp = (event) =>{

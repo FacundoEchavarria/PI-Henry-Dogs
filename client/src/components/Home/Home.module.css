@@ -1,9 +1,17 @@
+.homeBox{
+    background-color: rgb(246, 241, 233);
+    min-height: calc(83vh - 0.25rem);
+    display: grid;
+    grid-template-columns: 0.1fr 0.9fr;
+}
+.home{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .home ul{
     background-color: red;
     display: flex;
     list-style: none;
-
-}
-.home{
-    background-color: rgb(246, 241, 233);
 }

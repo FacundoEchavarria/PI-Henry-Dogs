@@ -26,7 +26,6 @@ function App() {
   return (
     <div className="App">
       {location.pathname === '/' ? null : <NavBar/>}
-      {location.pathname === '/' ? null : <Footer/>}
       <Routes>
         <Route path='/' element={<LandingPage/>}/>
         <Route path='/home' element={<Home/>}/>
@@ -34,7 +33,7 @@ function App() {
         <Route path='/detail/:id' element={<Detail/>}/>
         <Route path='/create' element={<CreateDog/>}/>
       </Routes>
-      
+      {location.pathname === '/' ? null : <Footer/>}
     </div>
   );
 }
