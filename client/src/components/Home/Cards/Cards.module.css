@@ -3,5 +3,6 @@
     grid-template-columns: repeat(4, 1fr);
     align-items: center;
     justify-items: center;
+    min-height: 80vh;
     height: 100%;
 }

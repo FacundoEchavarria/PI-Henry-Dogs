@@ -1,0 +1,51 @@
+.searchBarBox{
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 2rem;
+}
+.searchBar{
+    appearance: none;
+    outline: none;
+    border: 2px rgb(79, 32, 13) solid;
+    border-right: none;
+    border-radius:  0.4rem 0 0 0.4rem;
+    font-family: 'infoFont';
+    caret-color: rgb(79, 32, 13);
+    color: rgb(79, 32, 13);
+    height: 2rem;
+    width: 25%;
+    background-color: rgba(255, 217, 61, 0.1) ;
+    padding-left: 0.5rem;
+    font-weight: 900;
+
+    &:focus{
+        appearance: none;
+    }
+}
+.searchBarButton{
+    display: flex;
+    height: 2rem;
+    width: 3%;
+    background-color: rgb(79, 32, 13);
+    color: rgb(255, 217, 61);
+    border-radius: 0 0.4rem 0.4rem 0;
+    transition: all 0.1s;
+
+    &:hover{
+        cursor: pointer;
+        background-color: rgb(57, 23, 10);
+    }
+}
+.searchBarButton img{
+    height: 90%;
+    align-self: center;
+    width: 100%;
+    object-fit: contain;
+}
+
+/* rgb(255, 132, 0) naranja*/
+/* rgb(255, 217, 61)  amarillo*/
+/* rgb(79, 32, 13) marron*/
+

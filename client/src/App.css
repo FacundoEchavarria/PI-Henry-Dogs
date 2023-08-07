@@ -3,9 +3,30 @@
   margin: 0;
 }
 @font-face {
-  font-family: 'dogFont'; /* Nombre que le damos a la fuente */
+  font-family: 'dogFont';
   src: url('../src/multimedia/RetroVintage-Regular.otf')
+}
+@font-face {
+  font-family: 'infoFont';
+  src: url('../src/multimedia/RADEON-Light.otf')
 }
 .app{
   background-color: rgb(246, 241, 233);
+}
+/* Estilo de la scrollbar */
+::-webkit-scrollbar {
+  width: 10px; /* Ancho de la scrollbar vertical */
+}
+
+/* Estilo del pulgar de la scrollbar (la parte que se arrastra) */
+::-webkit-scrollbar-thumb {
+  background-color: #FF8400; /* Color del pulgar */
+  border: 2px rgb(79, 32, 13) solid;
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilo del track de la scrollbar (la parte que queda detrás del pulgar) */
+::-webkit-scrollbar-track {
+  background-color: #F6F1E9; /* Color del track */
+  border-left: 2px rgb(79, 32, 13) solid;
 }

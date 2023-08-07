@@ -11,7 +11,7 @@ const LandingPage = () => {
     return(
         <div className={styles.landingPage}>
             <div className={styles.enterBox}>
-                <h1 className={styles.title}>Dogs</h1>
+                <h1 className={styles.title}><span className={styles.doggo}>Doggo</span> Haven</h1>
                 <NavLink to={'/home'} className={styles.enterButtonBox}>
                     <img src={pawIcon} alt='logo' className={styles.enterButton}/>
                 </NavLink>

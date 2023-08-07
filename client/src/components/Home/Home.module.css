@@ -3,15 +3,33 @@
     min-height: calc(83vh - 0.25rem);
     display: grid;
     grid-template-columns: 0.1fr 0.9fr;
+    padding-top: 7vh;
 }
 .home{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-left: 0.1rem rgb(255, 132, 0) solid;
+    padding-left: 2rem;
 }
-
-.home ul{
-    background-color: red;
+.title{
     display: flex;
-    list-style: none;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+.title h1{
+    font-family: 'dogFont';
+    font-size: 3.5rem;
+    color: rgb(79, 32, 13);
+}
+.haven{
+    color: rgb(255, 132, 0);
+}
+.title p{
+    font-family: 'infoFont';
+    font-size: 1.2rem;
+}
+.title hr{
+    width: 70%;
 }

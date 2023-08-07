@@ -1,8 +1,11 @@
 //Library componets
 import React, { useState } from "react"
 import { useDispatch, useSelector } from 'react-redux'
-
+import searchIcon from '../../../multimedia/searchIcon.svg'
+//Actions
 import { filterByTemper, orderDogs, searchDog } from "../../../redux/actions"
+//styles
+import styles from './SearchBar.module.css'
 
 
 const SearchBar = ({setCurrentPage, setLoading}) => {
@@ -24,9 +27,9 @@ const SearchBar = ({setCurrentPage, setLoading}) => {
     }
 
     return (
-        <div>
-            <input type='search' value={searchValue} onChange={handleChange}/>
-            <button onClick={handleClick}>Buscar</button>
+        <div className={styles.searchBarBox}>
+            <input type='search' value={searchValue} onChange={handleChange} className={styles.searchBar} placeholder="Search"/>
+            <button onClick={handleClick} className={styles.searchBarButton}><img src={searchIcon} alt='logo'/></button>
         </div>
     )
 }

@@ -6,16 +6,27 @@ import { NavLink } from 'react-router-dom'
 
 const Card = ({id, name, weight, image, temperament}) => {
 
+    temperament = temperament?.split(', ')
 
     return (
         <div className={styles.card}>
             <div className={styles.infoCard}>
-                <h2>Weight: {weight}</h2>
-                <h2>Temperament: {temperament}</h2>
-                {image ?
-                <NavLink to={`/detail/${id}`}> <button>info</button></NavLink>
+                <p>Weight: </p>
+                <p>{weight} Kg</p>
+                <p>Temperament: </p>
+                {temperament?.length > 0 ?
+                <ul>
+                    {temperament.map(temp => (
+                        <li>{temp}</li>
+                    ))}
+                </ul>
                 :
-                <p>No hay mas info de este perro</p>
+                <p>Unknown</p>
+                }
+                {image ?
+                <NavLink to={`/detail/${id}`} className={styles.navLink}> <button>More info</button></NavLink>
+                :
+                <p className={styles.navLink}>No hay mas info de este perro</p>
             }
             </div>
             <div className={styles.cardImg}>

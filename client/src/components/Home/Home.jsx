@@ -66,10 +66,22 @@ const Home = () =>{
         })
     }
     const nextPage = () =>{
-        if(currentPage < Math.ceil(dogs.length / dogsPerPage))setCurrentPage(currentPage + 1)
+        if(currentPage < Math.ceil(dogs.length / dogsPerPage)){
+            setCurrentPage(currentPage + 1)
+            window.scrollTo({
+                top:0,
+                behavior:'smooth'
+            })
+        }
     }
     const prevPage = () =>{
-        if(currentPage > 1) setCurrentPage(currentPage - 1)
+        if(currentPage > 1) {
+            setCurrentPage(currentPage - 1)
+            window.scrollTo({
+                top:0,
+                behavior:'smooth'
+            })
+        }
     }
     
     return (
@@ -77,10 +89,14 @@ const Home = () =>{
             <div className={styles.sideBarBox}>
                 <SideBar
                 setCurrentPage={setCurrentPage}
-                />
+                /> 
             </div>
             <div className={styles.home}>
-                <h1>Home</h1>
+                <div className={styles.title}>
+                    <h1><span className={styles.haven}>Doggo</span> Haven</h1>
+                    <p>Immerse yourself in the incredible tales of our furry friends, where each breed has its own story to tell.</p>
+                    <hr />
+                </div>
                 <SearchBar
                 setCurrentPage={setCurrentPage}
                 loading={loading}
