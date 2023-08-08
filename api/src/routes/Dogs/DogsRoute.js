@@ -10,6 +10,14 @@ router.get('/', async(req, res) =>{
         return res.status(400).json({error: error.message})
     }
 })
+router.get('/created', async(req, res) =>{
+    try {
+        const response = await dogsController.getCreated()
+        return res.status(200).json(response)
+    } catch (error) {
+        return res.status(400).json({error: error.message})
+    }
+})
 router.get('/:id', async(req, res) =>{
     const {id} = req.params
     try {
@@ -37,5 +45,17 @@ router.post('/', async(req, res) =>{
         return res.status(400).json(error.message)
     }
 })
+
+router.delete('/:id', async(req, res) => {
+    const {id} = req.params
+    try {
+        const request = await dogsController.deleteDog(id)
+        res.status(200).json(request)
+    } catch (error) {
+        res.status(400).json({message: error.message})
+    }
+})
+
+
 
 module.exports = router;

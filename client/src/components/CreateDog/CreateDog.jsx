@@ -2,11 +2,19 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+//stles
+import Styles from './CreateDog.module.css'
+//Validation
+import validation from "./validations";
+
+
 
 const CreateDog = () => {
 
+    //Trae el estado global donde estan todos los temperamentos
     const temperament = useSelector((state) => state.temperament)
 
+    //Creo los estados locales donde voy a gguardar lo que escribo en los forms y los errores de los mismos
     const [newDog, setNewDog] = useState({
         name: '',
         imagen: '',
@@ -18,31 +26,53 @@ const CreateDog = () => {
         life_span_2: '',
         temperament: [],
     })
-
+    const [errors, setErrors] = useState({})
     
+    //La funcion que se ejecuta cada vez que cambio algo de los estados
     const handleChange = (event) => {
         setNewDog({
             ...newDog,
             [event.target.name]: event.target.value
         })
+        setErrors(validation({...newDog, [event.target.name]: event.target.value}))
     }
+    //la funcion que se encarga de la logica de los temperamentos en los checkboxs
     const handleTemp = (event) => {
         let inputValue =  event.target.value
         let checked =  event.target.checked
 
-        if(!checked) setNewDog({
-            ...newDog,
-            temperament: newDog.temperament.filter(temp => temp !== inputValue)
-        })
-        else setNewDog({
-            ...newDog,
-            temperament:[...newDog.temperament, inputValue]
-        })
-
+        if(!checked) {
+            setNewDog({
+                ...newDog,
+                temperament: newDog.temperament.filter(temp => temp !== inputValue)
+            })
+            setErrors(validation({...newDog, temperament: newDog.temperament.filter(temp => temp !== inputValue)}))
+        }
+        else {
+            setNewDog({
+                ...newDog,
+                temperament:[...newDog.temperament, inputValue]
+            })
+            setErrors(validation({...newDog, temperament:[...newDog.temperament, inputValue]}))
+        }
     }
+    
+    const clearCheckboxes = () => {
+        const checkboxes = document.querySelectorAll("input[type='checkbox']");
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = false;
+        });
+    };
+
+    //la funcion que ttiene la logica cada vez que hago un submit
     const handleSubmit = async(event) =>{
         event.preventDefault();
-        let postDog = {
+        
+        errors.incomplete === undefined ? errors.incomplete = true : errors.incomplete = errors.incomplete
+
+        if(!errors.incomplete && Object.keys(errors).length === 1) {
+
+            let postDog = {
             name: newDog.name,
             imagen: newDog.imagen,
             peso: `${newDog.peso_1} - ${newDog.peso_2}`,
@@ -50,12 +80,31 @@ const CreateDog = () => {
             life_span: `${newDog.life_span_1} - ${newDog.life_span_2} years`,
             temperament: newDog.temperament.join(', '),
         }
-        await axios.post('http://localhost:3001/dogs/', postDog)
+        
+            await axios.post('http://localhost:3001/dogs/', postDog)
+            setNewDog({
+                name: '',
+                imagen: '',
+                altura_1: '',
+                altura_2: '',
+                peso_1: '',
+                peso_2: '',
+                life_span_1: '',
+                life_span_2: '',
+                temperament: [],
+            })
+            clearCheckboxes()
+            window.scrollTo({
+                top:0,
+                behavior:'smooth'
+            })
+        }
+        else alert('Faltan datos') 
     }
 
 
     return (
-        <div>
+        <div className={Styles.createDogBox}>
             <form>
                 <div>
                     <label>Name:</label>
@@ -67,6 +116,7 @@ const CreateDog = () => {
                     value={newDog.name}
                     onChange={handleChange}
                     />
+                    {errors.name ? <p>{errors.name}</p> : null}
                 </div>
                 <div>
                     <label>Weight:</label>
@@ -86,6 +136,7 @@ const CreateDog = () => {
                     value={newDog.peso_2}
                     onChange={handleChange}
                     />
+                    {errors.peso ? <p>{errors.peso}</p> : null}
                 </div>
                 <div>
                     <label>Height:</label>
@@ -105,6 +156,7 @@ const CreateDog = () => {
                     value={newDog.altura_2}
                     onChange={handleChange}
                     />
+                    {errors.altura ? <p>{errors.altura}</p> : null}
                 </div>
                 <div>
                     <label>Life span:</label>
@@ -124,6 +176,7 @@ const CreateDog = () => {
                     value={newDog.life_span_2}
                     onChange={handleChange}
                     />
+                    {errors.life_span ? <p>{errors.life_span}</p> : null}
                 </div>
                 <div>
                     <label>Image:</label>
@@ -135,6 +188,7 @@ const CreateDog = () => {
                     value={newDog.imagen}
                     onChange={handleChange}
                     />
+                    {errors.imagen ? <p>{errors.imagen}</p> : null}
                 </div>
                 <div>
                     <label>temperament:</label>
@@ -142,16 +196,16 @@ const CreateDog = () => {
                         <div key={temp.id}>
                             <label>{temp.nombre}</label>
                             <input
-                            
                             type="checkbox"
                             name={temp.nombre}
-                            value={temp.nombre}
+                            value={temp.id}
                             onChange={handleTemp}
                             />
                         </div>
                     ))}
-                <input type="submit" value='Create' onClick={handleSubmit}/>
+                    {errors.temperament ? <p>{errors.temperament}</p> : null}
                 </div>
+                <input type="submit" value='Create' onClick={handleSubmit}/>
             </form>
         </div>
     )

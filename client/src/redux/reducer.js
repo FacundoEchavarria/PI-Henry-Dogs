@@ -134,8 +134,8 @@ const reducer = (state = initialState, action) => {
                     orderAndFilter: {
                         ...state.orderAndFilter,
                         tempFilter:payload,
-
-                    }
+                    },
+                    searchError:false,
                 }
             }else{
                 let filteredDogs = state.allDogs.filter((dog) => dog?.temperament?.includes(payload))
@@ -160,8 +160,8 @@ const reducer = (state = initialState, action) => {
                     orderAndFilter: {
                         ...state.orderAndFilter,
                         originFilter: payload,
-
-                    }
+                    },
+                    searchError:false,
                 }
             }else{
                 let filteredDogs = []

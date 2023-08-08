@@ -1,5 +1,5 @@
 const axios = require('axios')
-const {Dog} = require('../db');
+const {Dog, Temperament} = require('../db');
 const { Op } = require('sequelize');
 const { API_KEY } = process.env;
 
@@ -27,6 +27,15 @@ const getAllDogs = async () =>{
         throw new Error(error.message)
     }
 } 
+
+const getCreated = async() => {
+    try {
+        const dbDogs = await Dog.findAll();
+        return dbDogs.length > 0 ? dbDogs : []
+    } catch (error) {
+        throw new Error(error)
+    }
+}
 
 const dogDetail = async (id) =>{
     try {
@@ -83,14 +92,42 @@ const dogByName = async (name) =>{
         throw new Error(error)
     }
 }
+
 const addDog = async(dog) =>{
     if(!dog.name || !dog.imagen || !dog.peso || !dog.altura || !dog.life_span) throw new Error('Faltan datos')
     try {
-        await Dog.create(dog)
+        const newDog = await Dog.create(dog)
+
+        const temperamentsPk = dog.temperament.split(', ')
+        for (const pk of temperamentsPk){
+            const temp = await Temperament.findByPk(pk)
+            await newDog.addTemperament(temp)
+        }
+
+        const temperaments = await newDog.getTemperaments();
+        const temperamentNames = temperaments.map(temp => temp.nombre);
+        newDog.temperament = temperamentNames.join(', ');
+        await newDog.save()
+
         const allDogs = await Dog.findAll()
+        console.log(allDogs);
         return allDogs
     } catch (error) {
         throw new Error('No se pudo crear el perro')
+    }
+}
+
+const deleteDog = async(id) => {
+    try {
+        const dog = await Dog.findByPk(id);
+
+        if(!dog) throw new Error('There is no dog with this id');
+
+        await dog.destroy();
+
+        return 'Dog successfully deleted'
+    } catch (error) {
+        throw new Error('There is no dog with this id')
     }
 }
 
@@ -98,5 +135,8 @@ module.exports = {
     getAllDogs,
     dogDetail,
     dogByName,
-    addDog
+    addDog,
+    getCreated,
+    deleteDog,
+
 }

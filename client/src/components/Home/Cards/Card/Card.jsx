@@ -16,8 +16,8 @@ const Card = ({id, name, weight, image, temperament}) => {
                 <p>Temperament: </p>
                 {temperament?.length > 0 ?
                 <ul>
-                    {temperament.map(temp => (
-                        <li>{temp}</li>
+                    {temperament.map((temp, index) => (
+                        <li key={index}>{temp}</li>
                     ))}
                 </ul>
                 :

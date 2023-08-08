@@ -1,16 +1,19 @@
 //Styles
 import './App.css';
 //Components
+import CreatePage from './components/CreatePage/CreatePage';
 import Detail from './components/Detail/Detail';
+import EditDog from './components/EditDog/EditDog';
 import Footer from './components/Footer/Footer';
 import Home from './components/Home/Home';
 import LandingPage from './components/LandingPage/LandingPage';
 import NavBar from './components/NavBar/NavBar';
 
+
+
 //Library components
 import {Routes, Route, useNavigate, useLocation} from 'react-router-dom'
 import { useEffect } from 'react';
-import CreateDog from './components/CreateDog/CreateDog';
 
 
 
@@ -31,7 +34,8 @@ function App() {
         <Route path='/home' element={<Home/>}/>
         <Route path='/home' element={<Home/>}/>
         <Route path='/detail/:id' element={<Detail/>}/>
-        <Route path='/create' element={<CreateDog/>}/>
+        <Route path='/create' element={<CreatePage/>}/>
+        <Route path='/Edit' element={<EditDog/>}/>
       </Routes>
       {location.pathname === '/' ? null : <Footer/>}
     </div>
