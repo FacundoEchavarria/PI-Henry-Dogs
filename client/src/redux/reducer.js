@@ -5,7 +5,9 @@ import { SEARCH_DOG,
     GET_ALL_TEMP, 
     ORDER, 
     FILTER_BY_TEMP, 
-    FILTER_BY_ORIGIN } from "./action-type";
+    FILTER_BY_ORIGIN,
+    EDIT_DOG,
+} from "./action-type";
 
 let initialState = {
     dogs: [],
@@ -15,8 +17,9 @@ let initialState = {
     orderAndFilter: {
         order: 'A',
         tempFilter: 'All',
-        originFilter: ''
-    }
+        originFilter: 'all'
+    },
+    dogToEdit: null
 }
 
 
@@ -147,7 +150,6 @@ const reducer = (state = initialState, action) => {
                         ...state.orderAndFilter,
                         tempFilter:payload,
                         originFilter:'all',
-
                     },
                     searchError: filteredDogs.length ? false : true
                 }
@@ -175,12 +177,17 @@ const reducer = (state = initialState, action) => {
                         ...state.orderAndFilter,
                         originFilter:payload,
                         tempFilter: 'All',
-
                     },
                     searchError: filteredDogs.length ? false : true
                 }
             }
-    
+            
+        case EDIT_DOG:
+            return{
+                ...state,
+                dogToEdit: payload
+            }
+
         default:
             return {...state}
     }

@@ -8,7 +8,9 @@ import {
     GET_ALL_TEMP, 
     ORDER, 
     FILTER_BY_TEMP, 
-    FILTER_BY_ORIGIN } from "./action-type";
+    FILTER_BY_ORIGIN,
+    EDIT_DOG
+} from "./action-type";
 
 const URL = 'http://localhost:3001'
 
@@ -84,6 +86,15 @@ export const filterByOrigin = (temp) =>{
         return dispatch({
             type: FILTER_BY_ORIGIN,
             payload: temp
+        })
+    }
+}
+
+export const editDog = (dogToEdit) => {
+    return(dispatch) => {
+        return dispatch({
+            type: EDIT_DOG,
+            payload: dogToEdit
         })
     }
 }

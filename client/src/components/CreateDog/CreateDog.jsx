@@ -1,5 +1,5 @@
 //Library components
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 //stles
@@ -9,7 +9,7 @@ import validation from "./validations";
 
 
 
-const CreateDog = () => {
+const CreateDog = ({dog}) => {
 
     //Trae el estado global donde estan todos los temperamentos
     const temperament = useSelector((state) => state.temperament)
@@ -27,7 +27,43 @@ const CreateDog = () => {
         temperament: [],
     })
     const [errors, setErrors] = useState({})
+
+    const ChargeDogToEdit = () => {
+        if (dog) {
+
+            let height = dog.altura.split('-')
+            let weight = dog.peso.split('-')
+            let life_span = dog.life_span.split('-')
+            let temperaments = dog.temperament.split(', ')
+            
+            const checkboxes = document.querySelectorAll("input[type='checkbox']");
+            checkboxes.forEach((checkbox) => {
+                if(temperaments.includes(checkbox.name)){
+                    checkbox.checked = true;
+                }
+            });
+
+            let dogToEdit = {
+                name: dog.name,
+                imagen: dog.imagen,
+                altura_1: parseInt(height[0]),
+                altura_2: parseInt(height[1]),
+                peso_1: parseInt(weight[0]),
+                peso_2: parseInt(weight[1]),
+                life_span_1: parseInt(life_span[0]),
+                life_span_2: parseInt(life_span[1]),
+                temperament: dog.temperament.split(', '),
+            }
+            
+            setNewDog(dogToEdit)
+        }
+    }
     
+    useEffect(() => {
+        ChargeDogToEdit()
+    }, [])
+
+
     //La funcion que se ejecuta cada vez que cambio algo de los estados
     const handleChange = (event) => {
         setNewDog({

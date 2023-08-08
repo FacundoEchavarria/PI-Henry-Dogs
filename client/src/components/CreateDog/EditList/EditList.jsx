@@ -1,12 +1,17 @@
 //Library components
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { editDog } from "../../../redux/actions";
+
 
 
 const EditList = () => {
 
     const [createdDogs, setCreatedDogs] = useState([]);
     const [aux, setAux] = useState(false);
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const axiosGetCreated = async() => {
@@ -23,6 +28,10 @@ const EditList = () => {
 
     const handleRecharge = () => {
         setAux(!aux)
+    }
+
+    const handleEdit = (dog) =>{
+        dispatch(editDog(dog))
     }
 
     return (
@@ -45,7 +54,7 @@ const EditList = () => {
                         <p>{elem.altura}</p>
                         <p>{elem.life_span}</p>
                         <div>
-                            <button>editar</button>
+                            <NavLink to={'/edit'}><button onClick={() => handleEdit(elem)}>editar</button></NavLink>
                         </div>
                         <div>
                             <button onClick={() => handleDelete(elem.id)}>eliminar</button>

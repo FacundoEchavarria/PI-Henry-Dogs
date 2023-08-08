@@ -35,7 +35,7 @@ function App() {
         <Route path='/home' element={<Home/>}/>
         <Route path='/detail/:id' element={<Detail/>}/>
         <Route path='/create' element={<CreatePage/>}/>
-        <Route path='/Edit' element={<EditDog/>}/>
+        <Route path='/edit' element={<EditDog/>}/>
       </Routes>
       {location.pathname === '/' ? null : <Footer/>}
     </div>
