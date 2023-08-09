@@ -1,5 +1,5 @@
 //Styles
-
+import styles from './Pagination.module.css'
 //Library Components
 import React from "react"
 
@@ -7,7 +7,7 @@ import React from "react"
 const Pagination = ({pageNumbers, paginate, nextPage, prevPage}) => {
 
     return (
-        <div>
+        <div className={styles.paginationBox}>
             <ul>
                 <li><button type='button' onClick={() => prevPage()}>anterior</button></li>
                 {pageNumbers.map(number =>(

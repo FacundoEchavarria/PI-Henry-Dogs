@@ -104,16 +104,57 @@ const addDog = async(dog) =>{
             await newDog.addTemperament(temp)
         }
 
+        newDog.temperamentPk = newDog.temperament
+
         const temperaments = await newDog.getTemperaments();
         const temperamentNames = temperaments.map(temp => temp.nombre);
         newDog.temperament = temperamentNames.join(', ');
         await newDog.save()
 
         const allDogs = await Dog.findAll()
-        console.log(allDogs);
+
         return allDogs
     } catch (error) {
         throw new Error('No se pudo crear el perro')
+    }
+}
+
+const updateDog = async(dog) => {
+    if(!dog.name || !dog.imagen || !dog.peso || !dog.altura || !dog.life_span) throw new Error('Faltan datos')
+    try {
+        const updateDog = await Dog.findByPk(dog.id)
+        await updateDog.setTemperaments([])
+        console.log(updateDog);
+
+        const temperamentsPk = dog.temperament.split(', ')
+        for (const pk of temperamentsPk){
+            const temp = await Temperament.findByPk(pk)
+            await updateDog.addTemperament(temp)
+        }
+        console.log(updateDog);
+
+        
+        const temperaments = await updateDog.getTemperaments();
+        const temperamentNames = temperaments.map(temp => temp.nombre);
+        updateDog.temperament = temperamentNames.join(', ');
+        
+
+        updateDog.name = dog.name;
+        updateDog.imagen = dog.imagen;
+        updateDog.altura = dog.altura;
+        updateDog.peso = dog.peso;
+        updateDog.life_span = dog.life_span;
+        updateDog.temperamentPk = dog.temperament
+        
+
+        await updateDog.save()
+
+
+        const allDogs = await Dog.findAll()
+
+        return allDogs
+    } catch (error) {
+        throw new Error('No se pudo editar el perro')
     }
 }
 
@@ -138,5 +179,6 @@ module.exports = {
     addDog,
     getCreated,
     deleteDog,
-
+    updateDog,
+    
 }

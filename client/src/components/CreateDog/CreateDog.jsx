@@ -44,6 +44,7 @@ const CreateDog = ({dog}) => {
             });
 
             let dogToEdit = {
+                id: dog.id,
                 name: dog.name,
                 imagen: dog.imagen,
                 altura_1: parseInt(height[0]),
@@ -52,7 +53,7 @@ const CreateDog = ({dog}) => {
                 peso_2: parseInt(weight[1]),
                 life_span_1: parseInt(life_span[0]),
                 life_span_2: parseInt(life_span[1]),
-                temperament: dog.temperament.split(', '),
+                temperament: dog.temperamentPk.split(', '),
             }
             
             setNewDog(dogToEdit)
@@ -109,15 +110,21 @@ const CreateDog = ({dog}) => {
         if(!errors.incomplete && Object.keys(errors).length === 1) {
 
             let postDog = {
-            name: newDog.name,
-            imagen: newDog.imagen,
-            peso: `${newDog.peso_1} - ${newDog.peso_2}`,
-            altura: `${newDog.altura_1} - ${newDog.altura_2}`,
-            life_span: `${newDog.life_span_1} - ${newDog.life_span_2} years`,
-            temperament: newDog.temperament.join(', '),
-        }
-        
+                name: newDog.name,
+                imagen: newDog.imagen,
+                peso: `${newDog.peso_1} - ${newDog.peso_2}`,
+                altura: `${newDog.altura_1} - ${newDog.altura_2}`,
+                life_span: `${newDog.life_span_1} - ${newDog.life_span_2} years`,
+                temperament: newDog.temperament.join(', '),
+            }
+
+            if(newDog.id) postDog = {...postDog, id: newDog.id}
+
+            event.target.value === 'Edit' ?
+            await axios.put(`http://localhost:3001/dogs/update`, postDog)
+            :
             await axios.post('http://localhost:3001/dogs/', postDog)
+
             setNewDog({
                 name: '',
                 imagen: '',
@@ -128,6 +135,7 @@ const CreateDog = ({dog}) => {
                 life_span_1: '',
                 life_span_2: '',
                 temperament: [],
+                
             })
             clearCheckboxes()
             window.scrollTo({
@@ -241,7 +249,7 @@ const CreateDog = ({dog}) => {
                     ))}
                     {errors.temperament ? <p>{errors.temperament}</p> : null}
                 </div>
-                <input type="submit" value='Create' onClick={handleSubmit}/>
+                <input type="submit" value={dog ? 'Edit' : 'Create'} onClick={handleSubmit}/>
             </form>
         </div>
     )

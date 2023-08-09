@@ -1,0 +1,17 @@
+.paginationBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    height: 5rem;
+}
+.paginationBox ul{
+    list-style: none;
+    display: flex;
+    
+}
+.paginationBox li{
+    list-style: none;
+    display: flex;
+
+}

@@ -56,6 +56,15 @@ router.delete('/:id', async(req, res) => {
     }
 })
 
+router.put('/update', async(req, res) => {
+    const dog = req.body
+    try {
+        const request = await dogsController.updateDog(dog)
+        res.status(200).json(request)
+    } catch (error) {
+        res.status(410).json({message: error.message})
+    }
+})
 
 
 module.exports = router;
