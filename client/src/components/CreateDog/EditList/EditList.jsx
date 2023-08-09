@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { editDog } from "../../../redux/actions";
+import Styles from './EditList.module.css'
 
 
 
@@ -36,8 +37,8 @@ const EditList = () => {
 
     return (
         <div>
-            <div>
-                <div>
+            <div className={Styles.table}>
+                <div className={Styles.tableIndex}>
                     <p>Name</p>
                     <p>weight</p>
                     <p>Height</p>
@@ -48,7 +49,7 @@ const EditList = () => {
                 </div>
             {createdDogs.length > 0 ?
                 createdDogs.map((elem) => (
-                    <div key={elem.id}>
+                    <div key={elem.id} className={Styles.tableInfo}>
                         <p>{elem.name}</p>
                         <p>{elem.peso}</p>
                         <p>{elem.altura}</p>
@@ -64,8 +65,8 @@ const EditList = () => {
                 :
                 null
                 }
-                <div>a</div>
             </div>
+            <hr />
             
         </div>
     )

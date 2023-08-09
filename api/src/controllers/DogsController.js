@@ -124,14 +124,12 @@ const updateDog = async(dog) => {
     try {
         const updateDog = await Dog.findByPk(dog.id)
         await updateDog.setTemperaments([])
-        console.log(updateDog);
 
         const temperamentsPk = dog.temperament.split(', ')
         for (const pk of temperamentsPk){
             const temp = await Temperament.findByPk(pk)
             await updateDog.addTemperament(temp)
         }
-        console.log(updateDog);
 
         
         const temperaments = await updateDog.getTemperaments();

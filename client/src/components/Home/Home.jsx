@@ -13,7 +13,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 //Actions
 import { clearAllDogs, getAllDogs, getAllTemp } from '../../redux/actions';
-import { NavLink } from 'react-router-dom';
 
 
 

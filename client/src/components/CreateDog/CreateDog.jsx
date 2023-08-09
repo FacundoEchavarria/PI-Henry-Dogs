@@ -150,8 +150,9 @@ const CreateDog = ({dog}) => {
     return (
         <div className={Styles.createDogBox}>
             <form>
-                <div>
+                <div className={Styles.indvLabelInput}>
                     <label>Name:</label>
+                    <div className={Styles.indivInput}>
                     <input
                     key= '1'
                     type="text"
@@ -160,10 +161,12 @@ const CreateDog = ({dog}) => {
                     value={newDog.name}
                     onChange={handleChange}
                     />
-                    {errors.name ? <p>{errors.name}</p> : null}
+                    {errors.name ? <p className={Styles.error}>{errors.name}</p> : null}
+                    </div>
                 </div>
-                <div>
+                <div className={Styles.indvLabelInput}>
                     <label>Weight:</label>
+                    <div className={Styles.multipleInputs}>
                     <input
                     key= '2'
                     type="number"
@@ -172,6 +175,7 @@ const CreateDog = ({dog}) => {
                     value={newDog.peso_1}
                     onChange={handleChange}
                     />
+                    <p>to</p>
                     <input
                     key= '3'
                     type="number"
@@ -180,10 +184,13 @@ const CreateDog = ({dog}) => {
                     value={newDog.peso_2}
                     onChange={handleChange}
                     />
-                    {errors.peso ? <p>{errors.peso}</p> : null}
+                    <p>Kg</p>
+                    {errors.peso ? <p className={Styles.error}>{errors.peso}</p> : null}
+                    </div>
                 </div>
-                <div>
+                <div className={Styles.indvLabelInput}>
                     <label>Height:</label>
+                    <div className={Styles.multipleInputs}>
                     <input
                     key= '4'
                     type="number"
@@ -192,6 +199,7 @@ const CreateDog = ({dog}) => {
                     value={newDog.altura_1}
                     onChange={handleChange}
                     />
+                    <p>to</p>
                     <input
                     key= '5'
                     type="number"
@@ -200,10 +208,13 @@ const CreateDog = ({dog}) => {
                     value={newDog.altura_2}
                     onChange={handleChange}
                     />
-                    {errors.altura ? <p>{errors.altura}</p> : null}
+                    <p>Cm</p>
+                    {errors.altura ? <p className={Styles.error}>{errors.altura}</p> : null}
+                    </div>
                 </div>
-                <div>
+                <div className={Styles.indvLabelInput}>
                     <label>Life span:</label>
+                    <div className={Styles.multipleInputs}>
                     <input
                     key= '6'
                     type="number"
@@ -212,6 +223,7 @@ const CreateDog = ({dog}) => {
                     value={newDog.life_span_1}
                     onChange={handleChange}
                     />
+                    <p>to</p>
                     <input
                     key= '7'
                     type="number"
@@ -220,10 +232,13 @@ const CreateDog = ({dog}) => {
                     value={newDog.life_span_2}
                     onChange={handleChange}
                     />
-                    {errors.life_span ? <p>{errors.life_span}</p> : null}
+                    <p>years</p>
+                    {errors.life_span ? <p className={Styles.error}>{errors.life_span}</p> : null}
+                    </div>
                 </div>
-                <div>
+                <div className={Styles.indvLabelInput}>
                     <label>Image:</label>
+                    <div className={Styles.indivInput}>
                     <input
                     key= '8'
                     type="text"
@@ -232,11 +247,13 @@ const CreateDog = ({dog}) => {
                     value={newDog.imagen}
                     onChange={handleChange}
                     />
-                    {errors.imagen ? <p>{errors.imagen}</p> : null}
+                    {errors.imagen ? <p className={Styles.error}>{errors.imagen}</p> : null}
+                    </div>
                 </div>
                 <div>
                     <label>temperament:</label>
-                    {temperament.map((temp) => (
+                    <div className={Styles.checkboxes}>
+                        {temperament.map((temp ,index) => (
                         <div key={temp.id}>
                             <label>{temp.nombre}</label>
                             <input
@@ -244,12 +261,16 @@ const CreateDog = ({dog}) => {
                             name={temp.nombre}
                             value={temp.id}
                             onChange={handleTemp}
+                            className={Styles.check}
+                            id={`checkbox-${index}`}
                             />
+                            <label htmlFor={`checkbox-${index}`} className={Styles.customCheck}></label>
                         </div>
-                    ))}
-                    {errors.temperament ? <p>{errors.temperament}</p> : null}
+                        ))}
+                    </div>
+                    {errors.temperament ? <p className={Styles.error}>{errors.temperament}</p> : null}
                 </div>
-                <input type="submit" value={dog ? 'Edit' : 'Create'} onClick={handleSubmit}/>
+                <input type="submit" value={dog ? 'Edit' : 'Create'} onClick={handleSubmit} className={Styles.submit}/>
             </form>
         </div>
     )
