@@ -119,7 +119,9 @@ const Home = () =>{
                 paginate = {paginate}
                 nextPage={nextPage}
                 prevPage={prevPage}
+                currentPage={currentPage}
                 />
+                
             </div>
         </div>
     )
