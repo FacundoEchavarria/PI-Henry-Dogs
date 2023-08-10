@@ -32,7 +32,6 @@ function App() {
       <Routes>
         <Route path='/' element={<LandingPage/>}/>
         <Route path='/home' element={<Home/>}/>
-        <Route path='/home' element={<Home/>}/>
         <Route path='/detail/:id' element={<Detail/>}/>
         <Route path='/create' element={<CreatePage/>}/>
         <Route path='/edit' element={<EditDog/>}/>

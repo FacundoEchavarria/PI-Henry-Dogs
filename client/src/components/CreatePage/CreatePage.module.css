@@ -2,3 +2,13 @@
     padding-top: 7vh;
     background-color: #F6F1E9;
 }
+.createPageBox h2 {
+    text-align: center;
+    font-family: 'dogFont';
+    font-size: 36px;
+    margin-top: 3rem;
+    color: rgb(79, 32, 13);
+}
+.createPageBox span{
+    color: rgb(255, 132, 0);
+}

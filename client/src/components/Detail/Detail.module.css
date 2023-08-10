@@ -1,0 +1,102 @@
+.detailPage{
+    padding-top: 7vh;
+    background-color: rgb(246, 241, 233);
+    width: 100%;
+    height: 83vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.tittleNButton{
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.tittleNButton button{
+    margin-right: 40rem;
+    height: 2rem;
+    width: 2rem;
+    appearance: none;
+    cursor: pointer;
+    border: 2px rgb(255, 132, 0) solid;
+    border-radius: 3rem;
+    background-color: rgb(255, 217, 61);
+
+    &:hover{
+        background-color: rgba(79, 32, 13);
+        color: rgb(255, 217, 61);
+    }
+}
+.detailPage h1{
+    font-family: 'dogFont';
+    font-size: 40px;
+    margin-bottom: 1rem;
+    color: rgba(79, 32, 13);
+    text-align: center;
+}
+.detailPage h1 span{
+    color: rgb(255, 132, 0);
+}
+.detailDog{
+    width: 80%;
+    height: 80%;
+    background-color: rgb(255, 217, 61);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px rgb(255, 132, 0) solid;
+    border-radius: 3rem;
+}
+.detailDog > p{
+    font-size: 60px;
+    font-family: 'dogFont';
+    color: rgb(255, 132, 0);
+}
+.insideDetailDog{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.insideDetailDog .imgBox{
+    width: 40%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.detailDog img {
+    height: 80%;
+    width: 70%;
+    border: 4px rgb(255, 132, 0) solid;
+    border-radius: 3rem;
+}
+.insideDetailDog .infoBox{
+    width: 60%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.insideDetailDog .insideInfoBox{
+    background-color: rgba(79, 32, 13, 0.7);
+    width: 70%;
+    height: 100%;
+    color: rgb(255, 217, 61);
+    border: 4px rgb(255, 132, 0) solid;
+    border-radius: 3rem;
+    display: grid;
+    grid-template-rows: repeat(5,1fr), 2fr;
+    text-align: center;
+    font-family: 'infoFont';
+}
+.insideDetailDog .insideInfoBox h3{
+    color: rgb(255, 132, 0);
+    font-size: 34px;
+    font-family: 'dogFont';
+    letter-spacing: 0.2rem;
+    padding-top: 1rem;
+}

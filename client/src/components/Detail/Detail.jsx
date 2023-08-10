@@ -1,9 +1,10 @@
 //Styles
+import Styles from './Detail.module.css'
+//Components
 import axios from 'axios'
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
-//Components
 
 
 
@@ -26,21 +27,32 @@ const Detail = () =>{
     }, [id]);
 
     return (
-        <div>
-            {loading ?
-            <p>cargando...</p>
-            :
-            <div>
-                <h1>Detail</h1>
-                <h2>{detailDog.name}</h2>
-                <h2>Peso: {detailDog.peso}</h2>
-                <h2>Altura: {detailDog.altura}</h2>
-                <h2>esperanza de vida: {detailDog.life_span}</h2>
-                <h2>temperamento: {detailDog.temperament}</h2>
-                <img src={detailDog.imagen} alt={`imagen del ${detailDog.name}`}/>
+        <div className={Styles.detailPage}>
+            <div className={Styles.tittleNButton}>
+                <NavLink to={'/home'} ><button>{'<-'}</button></NavLink>
+                <h1>Detail <span>Dog</span></h1>
             </div>
-            
-            }
+            <div className={Styles.detailDog}>
+                {loading ?
+                <p>Loading...</p>
+                :
+                <div className={Styles.insideDetailDog}>
+                    <div className={Styles.imgBox}>
+                        <img src={detailDog.imagen} alt={`imagen del ${detailDog.name}`}/>  
+                    </div>
+
+                    <div className={Styles.infoBox}>
+                        <div className={Styles.insideInfoBox}>
+                            <h3>{detailDog.name}</h3>
+                            <h2>Weight: {detailDog.peso} Kg</h2>
+                            <h2>Height: {detailDog.altura} Cm</h2>
+                            <h2>Life Span: {detailDog.life_span}</h2>
+                            <h2>temperament: {detailDog.temperament}</h2>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
             
         </div>
     )

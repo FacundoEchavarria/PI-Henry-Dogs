@@ -68,7 +68,12 @@ const reducer = (state = initialState, action) => {
             return {...state, temperament: payload}
 
         case SEARCH_DOG_ERROR:
-            return {...state, searchError: true}
+            return {
+                ...state, 
+                searchError: true,
+                dogs: [],
+                allDogs:[]
+            }
 
 
         case ORDER:
@@ -138,7 +143,7 @@ const reducer = (state = initialState, action) => {
                         ...state.orderAndFilter,
                         tempFilter:payload,
                     },
-                    searchError:false,
+                    searchError: state.allDogs.length > 0 ? false : true
                 }
             }else{
                 let filteredDogs = state.allDogs.filter((dog) => dog?.temperament?.includes(payload))
@@ -163,7 +168,7 @@ const reducer = (state = initialState, action) => {
                         ...state.orderAndFilter,
                         originFilter: payload,
                     },
-                    searchError:false,
+                    searchError: state.allDogs.length > 0 ? false : true
                 }
             }else{
                 let filteredDogs = []

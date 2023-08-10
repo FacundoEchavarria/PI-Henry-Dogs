@@ -33,3 +33,10 @@
 .title hr{
     width: 70%;
 }
+.loadNError{
+    height: 80vh;
+    font-size: 50px;
+    font-family: 'dogFont';
+    color: rgb(255, 132, 0);
+    text-align: center;
+}

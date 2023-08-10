@@ -1,3 +1,16 @@
 .editDogBox {
-    padding-top: 7vh;
+    background-color: rgb(246, 241, 233);
+}
+.editDogBox .title{
+    text-align: center;
+    font-family: 'dogFont';
+    color: rgb(79, 32, 13);
+    font-size: 36px;
+    padding-top: 10vh;
+}
+.editDogBox .title span{
+    text-align: center;
+    font-family: 'dogFont';
+    color: rgb(255, 132, 0);
+    font-size: 40px;
 }

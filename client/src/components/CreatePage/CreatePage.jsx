@@ -10,7 +10,9 @@ const CreatePage = () => {
 
     return(
         <div className={styles.createPageBox}>
+            <h2>My <span>Dogs</span></h2>
             <EditList/>
+            <h2>Create your own <span>Dog</span></h2>
             <CreateDog/>
         </div>
     )

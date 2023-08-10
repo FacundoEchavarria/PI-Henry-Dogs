@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Styles from './CreateDog.module.css'
 //Validation
 import validation from "./validations";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -13,6 +14,8 @@ const CreateDog = ({dog}) => {
 
     //Trae el estado global donde estan todos los temperamentos
     const temperament = useSelector((state) => state.temperament)
+
+    const navigate = useNavigate()
 
     //Creo los estados locales donde voy a gguardar lo que escribo en los forms y los errores de los mismos
     const [newDog, setNewDog] = useState({
@@ -142,6 +145,7 @@ const CreateDog = ({dog}) => {
                 top:0,
                 behavior:'smooth'
             })
+            navigate('/create')
         }
         else alert('Faltan datos') 
     }

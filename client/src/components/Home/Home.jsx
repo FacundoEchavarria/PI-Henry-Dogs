@@ -104,10 +104,10 @@ const Home = () =>{
                 
                 {
                 loading?
-                <p>Cargando...</p>
+                <p className={styles.loadNError}>Cargando...</p>
                 :
                 (searchError ?
-                <h2>No se encontro ese perro</h2>
+                <h2 className={styles.loadNError}>No se encontro ese perro</h2>
                 :
                 <Cards
                 dogs={currentDogs}

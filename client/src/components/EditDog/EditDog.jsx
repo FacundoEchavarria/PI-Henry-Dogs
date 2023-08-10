@@ -18,6 +18,7 @@ const EditDog = () => {
 
     return (
         <div className={styles.editDogBox}>
+            <h1 className={styles.title}>Edit your <span>Dog</span></h1>
             <CreateDog
             dog = {dogToEdit}
             />

@@ -7,13 +7,13 @@ router.get('/', async(req, res) =>{
         const response = await dogsController.getAllDogs()
         return res.status(200).json(response)
     } catch (error) {
-        return res.status(400).json({error: error.message})
+        return res.status(404).json({error: error.message})
     }
 })
 router.get('/created', async(req, res) =>{
     try {
         const response = await dogsController.getCreated()
-        return res.status(200).json(response)
+        return res.status(201).json(response)
     } catch (error) {
         return res.status(400).json({error: error.message})
     }
@@ -52,7 +52,7 @@ router.delete('/:id', async(req, res) => {
         const request = await dogsController.deleteDog(id)
         res.status(200).json(request)
     } catch (error) {
-        res.status(400).json({message: error.message})
+        res.status(404).json({message: error.message})
     }
 })
 
@@ -60,9 +60,9 @@ router.put('/update', async(req, res) => {
     const dog = req.body
     try {
         const request = await dogsController.updateDog(dog)
-        res.status(200).json(request)
+        res.status(201).json(request)
     } catch (error) {
-        res.status(410).json({message: error.message})
+        res.status(400).json({message: error.message})
     }
 })
 
