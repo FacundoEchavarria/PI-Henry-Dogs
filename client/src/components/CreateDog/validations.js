@@ -1,7 +1,7 @@
 const validation = (dog) => {
     const validationDogName = new RegExp(/^[a-zA-Z]+$/)
     const validationImgUrl = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/)
-    const onlyNumbers = /^[0-9]+$/;
+    const onlyNumbers = new RegExp(/^[0-9]+$/) ;
 
     let errors = {
         incomplete: true

@@ -9,7 +9,9 @@ import {
     ORDER, 
     FILTER_BY_TEMP, 
     FILTER_BY_ORIGIN,
-    EDIT_DOG
+    EDIT_DOG,
+    ADD_FAV,
+    DELETE_FAV
 } from "./action-type";
 
 const URL = 'http://localhost:3001'
@@ -95,6 +97,23 @@ export const editDog = (dogToEdit) => {
         return dispatch({
             type: EDIT_DOG,
             payload: dogToEdit
+        })
+    }
+}
+
+export const addFav = (dogToFav) => {
+    return (dispatch) => {
+        return dispatch({
+            type: ADD_FAV,
+            payload: dogToFav
+        })
+    }
+}
+export const deleteFav = (id) => {
+    return (dispatch) => {
+        return dispatch({
+            type: DELETE_FAV,
+            payload: id
         })
     }
 }

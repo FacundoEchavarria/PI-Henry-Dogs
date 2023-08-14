@@ -13,7 +13,7 @@ router.get('/', async(req, res) =>{
 router.get('/created', async(req, res) =>{
     try {
         const response = await dogsController.getCreated()
-        return res.status(201).json(response)
+        return res.status(200).json(response)
     } catch (error) {
         return res.status(400).json({error: error.message})
     }
@@ -40,7 +40,7 @@ router.post('/', async(req, res) =>{
     const perro = req.body
     try {
         const dog = await dogsController.addDog(perro)
-        return res.status(200).json(dog)
+        return res.status(201).json(dog)
     } catch (error) {
         return res.status(400).json(error.message)
     }

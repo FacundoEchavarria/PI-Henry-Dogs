@@ -16,7 +16,7 @@ const getAllDogs = async () =>{
                 altura: dog.height.metric,
                 peso: dog.weight.metric === 'NaN' ? '20 - 34' : dog.weight.metric,
                 life_span: dog.life_span,
-                temperament: dog?.temperament 
+                temperament: dog?.temperament,
             })
         })
 

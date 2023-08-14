@@ -100,3 +100,14 @@
     padding-top: 0.3rem;
     letter-spacing: 0.2rem;
 }
+
+.favButton{
+    appearance: none;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+}

@@ -1,0 +1,23 @@
+.favoritesBox{
+    padding-top: 7vh;
+    min-height: 83vh;
+    background-color: rgb(246, 241, 233);
+    display: flex;
+    flex-direction: column;
+}
+.favoritesBox p{
+    font-family: 'dogFont';
+    font-size: 30px;
+    color: rgb(79, 32, 13);
+    align-self: center;
+}
+.favoritesBox h1{
+    text-align: center;
+    font-family: 'dogFont';
+    padding-top: 3vh;
+    font-size: 38px;
+    color: rgb(79, 32, 13);
+}
+.favoritesBox span{
+    color: rgb(255, 132, 0);
+}

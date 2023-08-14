@@ -1,13 +1,44 @@
 //Styles
 import styles from './Card.module.css'
 //Library components
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { NavLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { addFav, deleteFav } from '../../../../redux/actions';
 
 const Card = ({id, name, weight, image, temperament}) => {
 
-    temperament = temperament?.split(', ')
+    const [isFav, setIsFav] = useState(false);
+    const dispatch = useDispatch();
+    const favorites = useSelector(state => state.favorites);
 
+    temperament = temperament?.split(', ');
+
+    useEffect(() => {
+        favorites.forEach((fav) => {
+            if (fav.id === id) {
+            setIsFav(true);
+            }
+        });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [favorites])
+    
+    const handleFavorite = (dog) => {
+        if(isFav) {
+            setIsFav(false);
+            dispatch(deleteFav(id))
+        } 
+        else {
+            setIsFav(true);
+            dispatch(addFav({
+                id: id, 
+                name: name, 
+                imagen: image, 
+                peso: weight, 
+                temperament: temperament.join(', '),
+            }))
+        } 
+    }
     return (
         <div className={styles.card}>
             <div className={styles.infoCard}>
@@ -27,7 +58,12 @@ const Card = ({id, name, weight, image, temperament}) => {
                 <NavLink to={`/detail/${id}`} className={styles.navLink}> <button>More info</button></NavLink>
                 :
                 <p className={styles.navLink}>No hay mas info de este perro</p>
-            }
+                }
+                {isFav ? 
+                <button onClick={handleFavorite} className={styles.favButton}>💛</button>
+                :
+                <button onClick={handleFavorite} className={styles.favButton}>🤍</button>
+                } 
             </div>
             <div className={styles.cardImg}>
                 <img src={image} alt={`imagen del ${name}`}/>

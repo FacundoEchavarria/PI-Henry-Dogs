@@ -37,7 +37,7 @@ module.exports = (sequelize) => {
     temperamentPk:{
       type: DataTypes.TEXT,
       allowNull: true,
-    },
+    }
   },
   {
     timestamps: false

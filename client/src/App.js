@@ -4,6 +4,7 @@ import './App.css';
 import CreatePage from './components/CreatePage/CreatePage';
 import Detail from './components/Detail/Detail';
 import EditDog from './components/EditDog/EditDog';
+import Favorites from './components/Favorites/Favorites';
 import Footer from './components/Footer/Footer';
 import Home from './components/Home/Home';
 import LandingPage from './components/LandingPage/LandingPage';
@@ -35,6 +36,7 @@ function App() {
         <Route path='/detail/:id' element={<Detail/>}/>
         <Route path='/create' element={<CreatePage/>}/>
         <Route path='/edit' element={<EditDog/>}/>
+        <Route path='/favorites' element={<Favorites/>}/>
       </Routes>
       {location.pathname === '/' ? null : <Footer/>}
     </div>

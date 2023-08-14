@@ -7,6 +7,8 @@ import { SEARCH_DOG,
     FILTER_BY_TEMP, 
     FILTER_BY_ORIGIN,
     EDIT_DOG,
+    ADD_FAV,
+    DELETE_FAV
 } from "./action-type";
 
 let initialState = {
@@ -19,7 +21,8 @@ let initialState = {
         tempFilter: 'All',
         originFilter: 'all'
     },
-    dogToEdit: null
+    dogToEdit: null,
+    favorites: [],
 }
 
 
@@ -191,6 +194,19 @@ const reducer = (state = initialState, action) => {
             return{
                 ...state,
                 dogToEdit: payload
+            }
+
+        case ADD_FAV:
+            return{
+                ...state,
+                favorites: [...state.favorites, payload]
+            }
+
+        case DELETE_FAV:
+            let filteredFavs = state.favorites.filter(dog => dog.id !== payload)
+            return{
+                ...state,
+                favorites: filteredFavs
             }
 
         default:

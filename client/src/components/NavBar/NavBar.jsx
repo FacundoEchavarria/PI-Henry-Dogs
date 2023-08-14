@@ -9,6 +9,12 @@ const NavBar = () =>{
 
     const location = useLocation()
 
+    const handleClick = () => {
+        window.scrollTo({
+            top:0
+        })
+    }
+
     return (
         <nav>
             <div className={styles.logoBox}>
@@ -16,9 +22,10 @@ const NavBar = () =>{
                 
             </div>
             <div className={styles.linkBox}>
-                <NavLink to={'/home'} ><button className={location.pathname === '/home' ? styles.activeLink : null}>Home</button></NavLink>
-                <NavLink to={'/create'}><button className={location.pathname === '/create' ? styles.activeLink : null}>Crear</button></NavLink>
+                <NavLink to={'/home'} ><button onClick={handleClick} className={location.pathname === '/home' ? styles.activeLink : null}>Home</button></NavLink>
+                <NavLink to={'/create'}><button onClick={handleClick} className={location.pathname === '/create' ? styles.activeLink : null}>Crear</button></NavLink>
                 <NavLink to={'/'}><button>About</button></NavLink>
+                <NavLink to={'/favorites'}><button>Favorites</button></NavLink>
             </div>
         </nav>
     )
