@@ -1,0 +1,7 @@
+.sideBarBox{
+    display: flex;
+    flex-direction: column;
+}
+.sideBarBox select{
+    margin-top: 2rem;
+}

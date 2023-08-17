@@ -35,7 +35,7 @@ const Card = ({id, name, weight, image, temperament}) => {
                 name: name, 
                 imagen: image, 
                 peso: weight, 
-                temperament: temperament.join(', '),
+                temperament: temperament?.length > 0 ? temperament.join(', ') : 'unkown',
             }))
         } 
     }

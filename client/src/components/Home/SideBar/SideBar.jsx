@@ -2,6 +2,8 @@
 import { useDispatch, useSelector } from "react-redux";
 //Actions
 import { orderDogs, filterByTemper, filterByOrigin } from "../../../redux/actions";
+//style
+import style from './SideBar.module.css'
 
 
 const SideBar = ({setCurrentPage}) =>{
@@ -27,7 +29,7 @@ const SideBar = ({setCurrentPage}) =>{
     }
 
     return (
-        <div>
+        <div className={style.sideBarBox}>
             <select name="order" value={order} onChange={handleOrder}>
                     <option value="A">A-Z</option>
                     <option value="D">Z-A</option>
